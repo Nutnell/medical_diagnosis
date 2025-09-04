@@ -10,7 +10,7 @@ import {
 export class CreatePatientDto {
   @IsString()
   @IsNotEmpty()
-  firstName: string;
+  firstName!: string;
 
   @IsString()
   @IsOptional()
@@ -18,16 +18,16 @@ export class CreatePatientDto {
 
   @IsString()
   @IsNotEmpty()
-  lastName: string;
+  lastName!: string;
 
   @IsDateString()
   @IsNotEmpty()
-  dateOfBirth: string;
+  dateOfBirth!: string;
 
   @IsString()
   @IsNotEmpty()
   @IsIn(['male', 'female', 'other', 'unknown'])
-  gender: string;
+  gender!: string;
 
   // You can add more validation for complex fields as needed
   @IsOptional()

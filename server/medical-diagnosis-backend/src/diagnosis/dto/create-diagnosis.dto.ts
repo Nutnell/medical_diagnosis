@@ -4,9 +4,9 @@ import { IsString, IsNotEmpty } from 'class-validator';
 export class CreateDiagnosisDto {
   @IsString()
   @IsNotEmpty()
-  content: string;
+  content!: string;
 
   @IsString()
   @IsNotEmpty()
-  patientId: string;
+  patientId!: string;
 }

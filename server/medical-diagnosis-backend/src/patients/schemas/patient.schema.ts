@@ -8,31 +8,31 @@ export type PatientDocument = Patient & Document;
 @Schema({ timestamps: true, collection: 'patients' })
 export class Patient {
   @Prop({ required: true })
-  firstName: string;
+  firstName!: string;
 
   @Prop()
-  middleName: string;
+  middleName!: string;
 
   @Prop({ required: true })
-  lastName: string;
+  lastName!: string;
 
   @Prop({ required: true })
-  dateOfBirth: string;
+  dateOfBirth!: string;
 
   @Prop({ required: true })
-  gender: string;
+  gender!: string;
 
   // Storing as a flexible object array to be FHIR-like
   @Prop({ type: Array })
-  telecom: any[];
+  telecom!: any[];
 
   // Storing as a flexible object array to be FHIR-like
   @Prop({ type: Array })
-  address: any[];
+  address!: any[];
 
   // This field is crucial for our 'deactivate' functionality instead of permanent deletion.
   @Prop({ default: true })
-  active: boolean;
+  active!: boolean;
 
   // We can add more complex, typed fields for other clinical data later.
 }

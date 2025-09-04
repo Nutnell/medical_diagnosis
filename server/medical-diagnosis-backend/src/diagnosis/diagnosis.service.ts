@@ -32,14 +32,23 @@ export class DiagnosisService {
           createDiagnosisDto,
         ),
       );
-      return response.data as any;
+      return response.data;
     } catch (error) {
-      console.error('Error communicating with AI service:', error.message);
-      throw new InternalServerErrorException('Failed to communicate with the AI service.');
+      if (error instanceof Error) {
+        console.error('Error communicating with AI service:', error.message);
+      } else {
+        console.error('Error communicating with AI service:', error);
+      }
+      throw new InternalServerErrorException(
+        'Failed to communicate with the AI service.',
+        error instanceof Error ? error.message : String(error),
+      );
     }
   }
 
-  async checkPatientSymptoms(checkSymptomsDto: CheckSymptomsDto): Promise<CheckSymptomsDto> {
+  async checkPatientSymptoms(
+    checkSymptomsDto: CheckSymptomsDto,
+  ): Promise<CheckSymptomsDto> {
     try {
       // Make a POST request to the Python AI microservice's /symptom-checker endpoint
       const response = await firstValueFrom(
@@ -50,8 +59,15 @@ export class DiagnosisService {
       );
       return response.data as CheckSymptomsDto;
     } catch (error) {
-      console.error('Error communicating with AI service:', error.message);
-      throw new InternalServerErrorException('Failed to communicate with the AI service.');
+      if (error instanceof Error) {
+        console.error('Error communicating with AI service:', error.message);
+      } else {
+        console.error('Error communicating with AI service:', error);
+      }
+      throw new InternalServerErrorException(
+        'Failed to communicate with the AI service.',
+        error instanceof Error ? error.message : String(error),
+      );
     }
   }
 }
